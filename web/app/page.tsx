@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import {
   buildAdditionalIssues,
   buildDiagnostics,
@@ -14,6 +15,9 @@ import {
   type RecommendationItem,
 } from "@/src/lib/lighthouse";
 import { generatePptxReport } from "@/src/lib/pptx";
+
+const PORTFOLIO_URL = "https://edgardo-portfolio.vercel.app/";
+const GITHUB_URL = "https://github.com/maliceedg";
 
 function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
@@ -470,13 +474,33 @@ export default function Page() {
 
   return (
     <div>
-      <div id="app-shell" className="min-h-screen bg-zinc-50 px-5 py-8 font-sans">
+      <div id="app-shell" className="min-h-screen px-5 py-8 font-sans text-stone-900">
         <div className="mx-auto max-w-6xl space-y-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <div className="text-sm font-semibold text-zinc-600">Local • Lighthouse → Client-ready export</div>
-              <div className="mt-1 text-3xl font-bold tracking-tight text-zinc-900">
-                Lighthouse Insights (Top 10 + Diagnostics)
+            <div className="flex items-start gap-3">
+              <a
+                href={PORTFOLIO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Edgardo Gonzalez — portfolio"
+                className="mt-0.5 shrink-0 rounded-lg outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+              >
+                <Image
+                  src="/logo.svg"
+                  alt=""
+                  width={88}
+                  height={45}
+                  priority
+                  className="h-11 w-auto"
+                />
+              </a>
+              <div>
+                <div className="text-sm font-semibold text-stone-600">
+                  Lighthouse → Client-ready export
+                </div>
+                <div className="mt-1 text-3xl font-bold tracking-tight text-stone-900">
+                  Lighthouse Insights
+                </div>
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -484,7 +508,7 @@ export default function Page() {
                 type="button"
                 onClick={handleExportPdf}
                 disabled={!report}
-                className="cursor-pointer rounded-full border border-zinc-200 bg-white/70 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                className="cursor-pointer rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold text-stone-900 shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Export PDF
               </button>
@@ -492,7 +516,7 @@ export default function Page() {
                 type="button"
                 onClick={handleExportPptx}
                 disabled={!report || isExportingPptx}
-                className="cursor-pointer rounded-full bg-zinc-900 px-4 py-2 text-sm font-semibold text-white shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                className="cursor-pointer rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-mid disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isExportingPptx ? "Exporting PPTX..." : "Export PPTX"}
               </button>
@@ -502,7 +526,7 @@ export default function Page() {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
             <div className="lg:col-span-2">
               <div
-                className="relative rounded-2xl border border-zinc-200 bg-white/60 p-4 shadow-sm backdrop-blur"
+                className="relative rounded-2xl border border-border bg-surface p-4 shadow-sm backdrop-blur"
                 onDragEnter={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -522,10 +546,10 @@ export default function Page() {
                 onDrop={(e) => void handleDrop(e)}
               >
                 {isDraggingJson ? (
-                  <div className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-zinc-900/20 bg-white/80 backdrop-blur flex items-center justify-center">
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-brand/30 bg-white/80 backdrop-blur flex items-center justify-center">
                     <div className="text-center">
-                      <div className="text-sm font-semibold text-zinc-900">Drop Lighthouse JSON to import</div>
-                      <div className="mt-1 text-xs text-zinc-600">We will parse it and generate Top 10 + Diagnostics</div>
+                      <div className="text-sm font-semibold text-stone-900">Drop Lighthouse JSON to import</div>
+                      <div className="mt-1 text-xs text-stone-600">We will parse it and generate Top 10 + Diagnostics</div>
                     </div>
                   </div>
                 ) : null}
@@ -557,7 +581,7 @@ export default function Page() {
                       type="button"
                       onClick={handleLoadFromText}
                       disabled={isParsing}
-                      className="cursor-pointer rounded-xl bg-zinc-900 px-3 py-2 text-sm font-semibold text-white shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="cursor-pointer rounded-xl bg-brand px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-mid disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isParsing ? "Parsing..." : "Load Report"}
                       </button>
@@ -587,7 +611,7 @@ export default function Page() {
                       }
                     }}
                     placeholder="Paste Lighthouse JSON here (performance/accessibility/best-practices/seo)..."
-                    className="min-h-[260px] w-full resize-y rounded-xl border border-zinc-200 bg-white/70 p-3 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-900/20"
+                    className="min-h-[260px] w-full resize-y rounded-xl border border-border bg-white/70 p-3 text-sm text-stone-900 outline-none focus:ring-2 focus:ring-brand/30"
                   />
 
                   <div className="text-xs text-zinc-600">
@@ -716,9 +740,34 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="text-xs text-zinc-500">
+          <div className="text-xs text-stone-500">
             Tip: For best results, use a Lighthouse JSON export from the Performance/Lighthouse panel. This app runs fully locally in your browser.
           </div>
+
+          <footer className="border-t border-border/80 pt-4 text-sm text-stone-600">
+            <p>
+              Built by{" "}
+              <a
+                href={PORTFOLIO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-stone-800 underline-offset-2 transition hover:text-brand hover:underline"
+              >
+                Edgardo Gonzalez
+              </a>
+              <span className="mx-2 text-stone-300" aria-hidden>
+                ·
+              </span>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-stone-800 underline-offset-2 transition hover:text-brand hover:underline"
+              >
+                @maliceedg
+              </a>
+            </p>
+          </footer>
         </div>
       </div>
 
