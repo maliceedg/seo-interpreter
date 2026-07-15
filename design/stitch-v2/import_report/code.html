@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lighthouse Insights - Import</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#a04100",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "secondary-container": "#5cfd80",
+                        "on-secondary-fixed-variant": "#00531e",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "error": "#ba1a1a",
+                        "secondary": "#006e2a",
+                        "secondary-fixed": "#69ff87",
+                        "primary-container": "#ff6b00",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#a04100",
+                        "primary-fixed-dim": "#ffb693",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#ffb693",
+                        "tertiary-fixed": "#ffddb3",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#351000",
+                        "tertiary": "#825500",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#002108",
+                        "secondary-fixed-dim": "#3ce36a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdbcc",
+                        "background": "#f8f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#d08b00",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#462c00",
+                        "on-tertiary-fixed": "#291800",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "surface-container": "#eceef0",
+                        "outline": "#8e7164",
+                        "on-secondary-container": "#00732c",
+                        "surface": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#5a4136",
+                        "tertiary-fixed-dim": "#ffb950"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "mono-code": ["Courier Prime"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-xl": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "mono-code": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F5F7F9; }
+        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid #E0E4E8; }
+        .drop-zone { border: 2px dashed #e2bfb0; transition: all 0.3s ease; }
+        .drop-zone:hover { border-color: #ff6b00; background-color: rgba(255, 107, 0, 0.05); }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased pb-24 md:pb-0">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden docked full-width top-0 bg-surface shadow-sm flex justify-between items-center w-full px-margin-mobile h-16 sticky z-40">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md">
+<span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Lighthouse Insights</h1>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<div class="max-w-[1440px] mx-auto flex min-h-screen">
+<!-- Side Nav (Desktop) -->
+<aside class="hidden md:flex flex-col w-[320px] bg-surface-container-lowest border-r border-outline-variant h-screen sticky top-0 py-8 px-6 shadow-sm z-30">
+<div class="flex items-center gap-3 mb-12">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Lighthouse Insights</h1>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-md text-label-md">Categories</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-bold opacity-80 scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+<span class="font-label-md text-label-md">Import</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-outline-variant">
+<button class="flex items-center gap-4 px-4 py-3 w-full rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop">
+<div class="max-w-4xl mx-auto space-y-8">
+<div class="space-y-2">
+<h2 class="text-headline-lg font-headline-lg text-on-background">Import Data</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Upload a Lighthouse JSON report or load recent history to begin analysis.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Upload Primary Action -->
+<div class="lg:col-span-2 glass-card rounded-xl p-8 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow">
+<h3 class="text-headline-md font-headline-md mb-6">Upload JSON Report</h3>
+<div class="drop-zone rounded-lg p-12 flex flex-col items-center justify-center text-center cursor-pointer mb-6 bg-surface-bright">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-3xl">cloud_upload</span>
+</div>
+<span class="text-label-md font-label-md text-primary mb-2">Click to browse or drag &amp; drop</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Supports .json files generated by Lighthouse</span>
+</div>
+<div class="flex items-center gap-4 my-6">
+<div class="h-px flex-1 bg-outline-variant"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">OR PASTE JSON</span>
+<div class="h-px flex-1 bg-outline-variant"></div>
+</div>
+<textarea class="w-full h-32 rounded-lg border border-outline-variant bg-surface-bright p-4 text-mono-code font-mono-code text-on-surface-variant placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder='{ "lhr": { "lighthouseVersion": "9.6.8", ... } }'></textarea>
+<div class="mt-6 flex justify-end">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg text-label-md font-label-md hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                                Analyze Data
+                            </button>
+</div>
+</div>
+<!-- Side Panel -->
+<div class="space-y-6">
+<!-- Instructions Card -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<h3 class="text-headline-md font-headline-md mb-4 text-on-surface">How to get a report</h3>
+<ol class="space-y-4 text-body-md font-body-md text-on-surface-variant list-decimal list-inside marker:text-primary marker:font-bold">
+<li>Open Chrome DevTools (F12)</li>
+<li>Navigate to the <strong>Lighthouse</strong> tab</li>
+<li>Click <strong>Analyze page load</strong></li>
+<li>Once complete, click the <span class="material-symbols-outlined text-sm align-middle">more_vert</span> menu</li>
+<li>Select <strong>Save as JSON</strong></li>
+</ol>
+</div>
+<!-- Recent Reports -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<h3 class="text-headline-md font-headline-md mb-4 text-on-surface">Recent Reports</h3>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-all text-left">
+<div>
+<div class="text-label-md font-label-md text-on-surface">example.com</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">Today, 10:42 AM</div>
+</div>
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-all text-left">
+<div>
+<div class="text-label-md font-label-md text-on-surface">staging.app.io</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">Yesterday, 4:15 PM</div>
+</div>
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container-lowest border-t border-outline-variant rounded-t-xl shadow-[0px_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">category</span>
+<span class="text-label-sm font-label-sm">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-90 transition-transform duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+<span class="text-label-sm font-label-sm">Import</span>
+</a>
+</nav>
+</body></html>

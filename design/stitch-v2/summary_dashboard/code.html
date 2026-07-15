@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lighthouse Insights - Summary Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#a04100",
+                      "on-tertiary-fixed-variant": "#624000",
+                      "on-primary-container": "#572000",
+                      "outline-variant": "#e2bfb0",
+                      "secondary-container": "#5cfd80",
+                      "on-secondary-fixed-variant": "#00531e",
+                      "on-primary-fixed-variant": "#7a3000",
+                      "error": "#ba1a1a",
+                      "secondary": "#006e2a",
+                      "secondary-fixed": "#69ff87",
+                      "primary-container": "#ff6b00",
+                      "surface-container-low": "#f2f4f6",
+                      "primary": "#a04100",
+                      "primary-fixed-dim": "#ffb693",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#ffb693",
+                      "tertiary-fixed": "#ffddb3",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-primary-fixed": "#351000",
+                      "tertiary": "#825500",
+                      "on-background": "#191c1e",
+                      "on-secondary-fixed": "#002108",
+                      "secondary-fixed-dim": "#3ce36a",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#ffdbcc",
+                      "background": "#f8f9fb",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#d08b00",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#f8f9fb",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#462c00",
+                      "on-tertiary-fixed": "#291800",
+                      "surface-dim": "#d8dadc",
+                      "inverse-surface": "#2d3133",
+                      "surface-container": "#eceef0",
+                      "outline": "#8e7164",
+                      "on-secondary-container": "#00732c",
+                      "surface": "#f8f9fb",
+                      "on-surface": "#191c1e",
+                      "on-surface-variant": "#5a4136",
+                      "tertiary-fixed-dim": "#ffb950"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "label-md": ["Public Sans"],
+                      "headline-lg": ["Public Sans"],
+                      "headline-md": ["Public Sans"],
+                      "body-lg": ["Public Sans"],
+                      "mono-code": ["Courier Prime"],
+                      "body-md": ["Public Sans"],
+                      "label-sm": ["Public Sans"],
+                      "headline-xl": ["Public Sans"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "mono-code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .circular-chart { display: block; margin: 0 auto; max-width: 80%; max-height: 250px; }
+        .circle-bg { fill: none; stroke: #eceef0; stroke-width: 3.8; }
+        .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; animation: progress 1s ease-out forwards; }
+        @keyframes progress { 0% { stroke-dasharray: 0 100; } }
+        .percentage { fill: #191c1e; font-family: sans-serif; font-size: 0.5em; text-anchor: middle; font-weight: bold; }
+        
+        .score-good { stroke: #006e2a; }
+        .score-needs-improvement { stroke: #d08b00; }
+        .score-poor { stroke: #ba1a1a; }
+        
+        body { padding-bottom: 80px; } /* Space for bottom nav */
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center w-full px-margin-mobile h-16 fixed z-40">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">Lighthouse Insights</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="w-full max-w-container-max px-margin-mobile md:px-margin-desktop pt-24 pb-8 flex-grow flex flex-col gap-8">
+<!-- Hero Section: Overall Score -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant p-8 flex flex-col items-center text-center">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-2">Overall Site Health</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-6 max-w-2xl">A consolidated view of your website's performance, accessibility, best practices, and SEO.</p>
+<div class="w-64 h-64 relative">
+<svg class="circular-chart" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<!-- 87 score stroke-dasharray="87, 100" -->
+<path class="circle score-good" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="87, 100"></path>
+<text class="percentage text-headline-xl font-headline-xl" x="18" y="20.35">87</text>
+</svg>
+</div>
+<div class="mt-4 px-4 py-2 rounded-full bg-secondary-container bg-opacity-20 text-secondary border border-secondary-container flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span class="text-label-md font-label-md">Looking Good!</span>
+</div>
+</section>
+<!-- Quick Wins Section -->
+<section class="flex flex-col gap-4">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="bolt">bolt</span> Quick Wins
+            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant p-6 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-2">
+<h4 class="text-body-lg font-body-lg font-semibold text-on-surface">Optimize Images</h4>
+<span class="px-2 py-1 rounded-full bg-error-container bg-opacity-20 text-error text-label-sm font-label-sm border border-error-container">High Impact</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">Compressing and sizing 5 large images correctly can significantly speed up loading times.</p>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-tertiary font-medium">Estimated savings: ~2.1s</span>
+<button class="text-primary font-semibold hover:underline">View Details</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant p-6 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-2">
+<h4 class="text-body-lg font-body-lg font-semibold text-on-surface">Improve Contrast</h4>
+<span class="px-2 py-1 rounded-full bg-tertiary-container bg-opacity-20 text-tertiary-container text-label-sm font-label-sm border border-tertiary-container">Medium Impact</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">A few text elements don't have enough contrast against their backgrounds, making them hard to read.</p>
+</div>
+<div class="flex items-center justify-between text-sm">
+<span class="text-tertiary font-medium">Affects 3 elements</span>
+<button class="text-primary font-semibold hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Overview -->
+<section class="flex flex-col gap-4">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="category">category</span> Category Breakdown
+            </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Perf -->
+<div class="bg-surface-container-lowest rounded-lg border border-surface-variant p-4 flex flex-col items-center text-center">
+<svg class="w-16 h-16 mb-2" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle score-needs-improvement" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="72, 100"></path>
+<text class="percentage text-label-md" x="18" y="20.35">72</text>
+</svg>
+<span class="text-label-md font-label-md text-on-surface">Performance</span>
+</div>
+<!-- Access -->
+<div class="bg-surface-container-lowest rounded-lg border border-surface-variant p-4 flex flex-col items-center text-center">
+<svg class="w-16 h-16 mb-2" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle score-good" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="95, 100"></path>
+<text class="percentage text-label-md" x="18" y="20.35">95</text>
+</svg>
+<span class="text-label-md font-label-md text-on-surface">Accessibility</span>
+</div>
+<!-- Best Practices -->
+<div class="bg-surface-container-lowest rounded-lg border border-surface-variant p-4 flex flex-col items-center text-center">
+<svg class="w-16 h-16 mb-2" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle score-good" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<text class="percentage text-label-md" x="18" y="20.35">100</text>
+</svg>
+<span class="text-label-md font-label-md text-on-surface">Best Practices</span>
+</div>
+<!-- SEO -->
+<div class="bg-surface-container-lowest rounded-lg border border-surface-variant p-4 flex flex-col items-center text-center">
+<svg class="w-16 h-16 mb-2" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle score-good" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="82, 100"></path>
+<text class="percentage text-label-md" x="18" y="20.35">82</text>
+</svg>
+<span class="text-label-md font-label-md text-on-surface">SEO</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden docked full-width bottom-0 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-low shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe border-t-0">
+<!-- Active: Dashboard -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<!-- Inactive: Categories -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="category">category</span>
+<span class="text-label-sm font-label-sm">Categories</span>
+</a>
+<!-- Inactive: Import -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="upload_file">upload_file</span>
+<span class="text-label-sm font-label-sm">Import</span>
+</a>
+</nav>
+</body></html>

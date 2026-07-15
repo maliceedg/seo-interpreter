@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Category Detail - Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#a04100",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "on-primary-container": "#572000",
+                        "outline-variant": "#e2bfb0",
+                        "secondary-container": "#5cfd80",
+                        "on-secondary-fixed-variant": "#00531e",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "error": "#ba1a1a",
+                        "secondary": "#006e2a",
+                        "secondary-fixed": "#69ff87",
+                        "primary-container": "#ff6b00",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#a04100",
+                        "primary-fixed-dim": "#ffb693",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#ffb693",
+                        "tertiary-fixed": "#ffddb3",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#351000",
+                        "tertiary": "#825500",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#002108",
+                        "secondary-fixed-dim": "#3ce36a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdbcc",
+                        "background": "#f8f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#d08b00",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#462c00",
+                        "on-tertiary-fixed": "#291800",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "surface-container": "#eceef0",
+                        "outline": "#8e7164",
+                        "on-secondary-container": "#00732c",
+                        "surface": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#5a4136",
+                        "tertiary-fixed-dim": "#ffb950"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "mono-code": ["Courier Prime"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "headline-xl": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "mono-code": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #f2f4f6; /* surface-container-low */
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .percentage {
+            fill: #191c1e; /* on-surface */
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md pb-24 md:pb-0">
+<!-- Header - Contextual Back Navigation (Standard TopAppBar structure logic, customized for back action) -->
+<header class="bg-surface shadow-sm sticky top-0 z-40 w-full h-16 px-margin-mobile flex justify-between items-center hidden md:flex">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Performance</h1>
+</div>
+</header>
+<!-- Mobile Header -->
+<header class="bg-surface shadow-sm sticky top-0 z-40 w-full h-16 px-margin-mobile flex justify-between items-center md:hidden border-b border-surface-dim">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Performance</h1>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- Hero Section: Score Gauge & Status -->
+<section class="flex flex-col items-center justify-center mb-12">
+<div class="relative w-48 h-48 mb-6">
+<svg class="circular-chart w-full h-full drop-shadow-sm" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<!-- Score 40 = Warning/Error hue -> text-error mapping to stroke #ba1a1a -->
+<path class="circle" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#ba1a1a" stroke-dasharray="40, 100"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-headline-xl font-headline-xl text-on-surface">40</span>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="bg-error-container text-on-error-container px-6 py-2 rounded-full inline-flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-label-md font-label-md">Needs Improvement</span>
+</div>
+</section>
+<!-- What this means -->
+<section class="max-w-2xl mx-auto text-center mb-16">
+<h2 class="text-headline-md font-headline-md mb-4 text-primary">What this means</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant leading-relaxed">
+                Your site is currently loading slower than recommended. This means visitors might experience delays before they can interact with the page or read the content. Improving these metrics directly helps keep users engaged.
+            </p>
+</section>
+<!-- Impactful Issues List -->
+<section class="max-w-4xl mx-auto">
+<h3 class="text-label-sm font-label-sm uppercase tracking-wider text-on-surface-variant mb-6 border-b border-surface-dim pb-2">Top Impactful Issues</h3>
+<div class="space-y-4">
+<!-- Issue Card 1 -->
+<div class="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant rounded-xl p-6 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="bg-error-container p-3 rounded-lg text-on-error-container shrink-0 mt-1 md:mt-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">image</span>
+</div>
+<div>
+<h4 class="text-headline-md font-headline-md text-on-surface mb-1">Large Images</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-2">Unoptimized images are taking too long to download.</p>
+<div class="inline-flex items-center gap-1 text-label-sm font-label-sm text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">timer</span> Potential savings: 1.2s
+                                </div>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-on-surface-variant border border-surface-variant px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container transition-colors shrink-0 whitespace-nowrap self-start md:self-auto">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Issue Card 2 -->
+<div class="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant rounded-xl p-6 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="bg-error-container p-3 rounded-lg text-on-error-container shrink-0 mt-1 md:mt-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">javascript</span>
+</div>
+<div>
+<h4 class="text-headline-md font-headline-md text-on-surface mb-1">Slow Scripts</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-2">Third-party code is blocking the main content from showing.</p>
+<div class="inline-flex items-center gap-1 text-label-sm font-label-sm text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">timer</span> Potential savings: 0.8s
+                                </div>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-on-surface-variant border border-surface-variant px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container transition-colors shrink-0 whitespace-nowrap self-start md:self-auto">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Issue Card 3 -->
+<div class="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant rounded-xl p-6 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="bg-primary-fixed p-3 rounded-lg text-on-primary-fixed shrink-0 mt-1 md:mt-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_cozy</span>
+</div>
+<div>
+<h4 class="text-headline-md font-headline-md text-on-surface mb-1">Visual Stability</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-2">Elements are shifting around while the page loads.</p>
+<div class="inline-flex items-center gap-1 text-label-sm font-label-sm text-primary-container bg-primary-fixed-dim px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">timer</span> Medium Impact
+                                </div>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-on-surface-variant border border-surface-variant px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container transition-colors shrink-0 whitespace-nowrap self-start md:self-auto">
+                            View Details
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Mobile Only) -->
+<!-- Suppressed on desktop, active on mobile as this represents browsing Categories -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container-lowest shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-90 transition-transform duration-200 p-2 rounded-lg bg-surface-container-lowest shadow-sm" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">category</span>
+<span class="text-label-sm font-label-sm">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">upload_file</span>
+<span class="text-label-sm font-label-sm">Import</span>
+</a>
+</nav>
+</body></html>

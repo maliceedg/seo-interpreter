@@ -504,3 +504,44 @@ export function formatFetchTime(fetchTime?: string): string {
   return d.toLocaleString(undefined, { year: "numeric", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
+/** Mean of available category scores (0–100). */
+export function getOverallHealthScore(report: LighthouseReport): number | null {
+  const scores = getCategoryScores(report)
+    .map((s) => s.scorePct)
+    .filter((n): n is number => typeof n === "number");
+  if (scores.length === 0) return null;
+  return scores.reduce((a, b) => a + b, 0) / scores.length;
+}
+
+export type ScoreBand = "good" | "needs-improvement" | "poor" | "unknown";
+
+export function getScoreBand(scorePct: number | null | undefined): ScoreBand {
+  if (scorePct === null || scorePct === undefined || Number.isNaN(scorePct)) return "unknown";
+  if (scorePct >= 90) return "good";
+  if (scorePct >= 50) return "needs-improvement";
+  return "poor";
+}
+
+export function getCategoryMeaning(scorePct: number | null | undefined): string {
+  const band = getScoreBand(scorePct);
+  if (band === "good") {
+    return "This category is in good shape. Keep monitoring regressions when you ship major changes.";
+  }
+  if (band === "needs-improvement") {
+    return "This category needs attention. Visitors may feel friction; prioritize the high-impact issues below.";
+  }
+  if (band === "poor") {
+    return "This category is well below recommended levels. Address blocking issues first before polishing secondary audits.";
+  }
+  return "No score is available for this category in the loaded report.";
+}
+
+export function impactLabelFromScore(score: number | null | undefined): "High Impact" | "Medium Impact" | "Low Impact" | "n/a" {
+  const pct = toScorePct(score ?? null);
+  if (pct === null) return "n/a";
+  const severity = 100 - pct;
+  if (severity >= 70) return "High Impact";
+  if (severity >= 40) return "Medium Impact";
+  return "Low Impact";
+}
+
